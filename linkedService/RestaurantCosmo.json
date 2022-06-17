@@ -1,0 +1,13 @@
+{
+	"name": "RestaurantCosmo",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "CosmoDB for Restaurant migration (middle point)",
+		"annotations": [],
+		"type": "CosmosDb",
+		"typeProperties": {
+			"connectionString": "AccountEndpoint=https://cosmoczmigration.documents.azure.com:443/;Database=Restaurants;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEU3QjVERkQ1LTk1MkEtNEMxRi1CQURDLTRBNEE2MTFBQjc0Nl8xNjhhMDMwYS1jMjliLTQ4NjQtYmI3YS1iOTA1MWNjZGJkYTgiDQp9"
+		}
+	}
+}
