@@ -99,6 +99,26 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Cosmo TO SQL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Copy Restaurant From Json to Cosmo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Cosmo TO SQL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"annotations": []
