@@ -1,0 +1,44 @@
+{
+	"name": "Cosmo To SQL",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "RestaurantCosmo",
+						"type": "DatasetReference"
+					},
+					"name": "Restaurant"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSQLRestaurants",
+						"type": "DatasetReference"
+					},
+					"name": "RESTAURANTSQL"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'SELECT \\n     c.name AS name,\\n     c.borough as borough,\\n     StringToNumber(c.restaurant_id) as id,\\n     c.address.street AS street , \\n     c.address.building AS building,\\n      c.address.zipcode AS zip,\\n      c.address.coord[0] AS lat,\\n      c.address.coord[1] AS long\\nFROM\\n     c\\n',",
+				"     format: 'documentQuery',",
+				"     systemColumns: false) ~> Restaurant",
+				"Restaurant sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> RESTAURANTSQL"
+			]
+		}
+	}
+}
