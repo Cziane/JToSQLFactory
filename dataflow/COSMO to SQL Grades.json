@@ -1,0 +1,26 @@
+{
+	"name": "COSMO to SQL Grades",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "RestaurantCosmo",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'SELECT \r\\n      StringToNumber(c.restaurant_id) as id,\r\\n    m.grade as grade,\r\\n    m.score as score,\r\\n    m.date[\\'$date\\'] as date_create\r\\nFROM\r\\n     c join m in c.grades',",
+				"     format: 'documentQuery',",
+				"     systemColumns: false) ~> source1"
+			]
+		}
+	}
+}
