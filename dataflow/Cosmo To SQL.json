@@ -25,7 +25,7 @@
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     query: 'SELECT \\n     c.name AS name,\\n     c.borough as borough,\\n     StringToNumber(c.restaurant_id) as id,\\n     c.address.street AS street , \\n     c.address.building AS building,\\n      c.address.zipcode AS zip,\\n      c.address.coord[0] AS lat,\\n      c.address.coord[1] AS long\\nFROM\\n     c\\n',",
+				"     query: 'SELECT \\n     c.name AS name,\\n     c.borough as borough,\\n     c.cuisine as cuisine,\\n     StringToNumber(c.restaurant_id) as id,\\n     c.address.street AS street , \\n     c.address.building AS building,\\n      c.address.zipcode AS zip,\\n      c.address.coord[0] AS lat,\\n      c.address.coord[1] AS long\\nFROM\\n     c\\n',",
 				"     format: 'documentQuery',",
 				"     systemColumns: false) ~> Restaurant",
 				"Restaurant sink(allowSchemaDrift: true,",
