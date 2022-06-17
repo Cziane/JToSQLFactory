@@ -12,14 +12,39 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "RestaurantsGrades",
+						"type": "DatasetReference"
+					},
+					"name": "SQLGRades"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     query: 'SELECT \\n     StringToNumber(c.restaurant_id) as id,\\n    m.grade as grade,\\n    StringToNumber(m.score as score),\\n    m.date[\\'$date\\'] as date_create\\nFROM\\n     c join m in c.grades',",
+				"     query: 'SELECT \\n     StringToNumber(c.restaurant_id) as restaurant_id,\\n    m.grade as grade,\\n    m.score as score,\\n    m.date[\\'$date\\'] as date_create\\nFROM\\n     c join m in c.grades',",
 				"     format: 'documentQuery',",
-				"     systemColumns: false) ~> source1"
+				"     systemColumns: false) ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          restaurant_id as integer,",
+				"          grade as string,",
+				"          score as integer,",
+				"          date_create as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SQLGRades"
 			]
 		}
 	}
