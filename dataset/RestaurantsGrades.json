@@ -1,0 +1,42 @@
+{
+	"name": "RestaurantsGrades",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQLRestaurants",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "restaurant_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "grade",
+				"type": "char"
+			},
+			{
+				"name": "score",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "date_create",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "grades"
+		}
+	}
+}
