@@ -15,10 +15,9 @@
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
-				"     query: 'SELECT \r\\n      StringToNumber(c.restaurant_id) as id,\r\\n    m.grade as grade,\r\\n    m.score as score,\r\\n    m.date[\\'$date\\'] as date_create\r\\nFROM\r\\n     c join m in c.grades',",
-				"     format: 'documentQuery',",
+				"     format: 'document',",
 				"     systemColumns: false) ~> source1"
 			]
 		}
