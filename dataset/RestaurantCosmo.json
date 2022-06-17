@@ -1,0 +1,15 @@
+{
+	"name": "RestaurantCosmo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestaurantCosmo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbSqlApiCollection",
+		"schema": {},
+		"typeProperties": {
+			"collectionName": "restaurants"
+		}
+	}
+}

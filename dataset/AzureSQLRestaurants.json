@@ -1,0 +1,12 @@
+{
+	"name": "AzureSQLRestaurants",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQLRestaurants",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
