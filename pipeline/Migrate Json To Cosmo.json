@@ -28,7 +28,8 @@
 					},
 					"sink": {
 						"type": "CosmosDbSqlApiSink",
-						"writeBehavior": "insert"
+						"writeBehavior": "insert",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -36,34 +37,10 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['address']['building']"
+									"path": "$['address']"
 								},
 								"sink": {
-									"path": "$['address]['building']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['street']"
-								},
-								"sink": {
-									"path": "$['address]['street']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['zipcode']"
-								},
-								"sink": {
-									"path": "$['address]['zipcode']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['coord'][0]"
-								},
-								"sink": {
-									"path": "$['address']['coord'][0]"
+									"path": "$.address"
 								}
 							},
 							{
@@ -71,7 +48,7 @@
 									"path": "$['borough']"
 								},
 								"sink": {
-									"path": "borough"
+									"path": "$.borough"
 								}
 							},
 							{
@@ -79,31 +56,15 @@
 									"path": "$['cuisine']"
 								},
 								"sink": {
-									"path": "cuisine"
+									"path": "$.cuisine"
 								}
 							},
 							{
 								"source": {
-									"path": "$['grades'][0]['date']['$date']"
+									"path": "$['grades']"
 								},
 								"sink": {
-									"path": "$['grades'][0]['date']['$date']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['grades'][0]['grade']"
-								},
-								"sink": {
-									"path": "$['grades'][0]['grade']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['grades'][0]['score']"
-								},
-								"sink": {
-									"path": "$['grades'][0]['score']"
+									"path": "$.grades"
 								}
 							},
 							{
@@ -111,7 +72,7 @@
 									"path": "$['name']"
 								},
 								"sink": {
-									"path": "name"
+									"path": "$.name"
 								}
 							},
 							{
@@ -119,7 +80,7 @@
 									"path": "$['restaurant_id']"
 								},
 								"sink": {
-									"path": "restaurant_id"
+									"path": "$.restaurant_id"
 								}
 							}
 						],
@@ -138,68 +99,6 @@
 						"type": "DatasetReference"
 					}
 				]
-			},
-			{
-				"name": "Cosmo To SQL",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "Copy Restaurant From Json to Cosmo",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "Cosmo To SQL",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "COSMO to SQL Grades",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "Cosmo To SQL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "COSMO to SQL Grades",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
 			}
 		],
 		"annotations": []
